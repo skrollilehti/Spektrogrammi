@@ -14,7 +14,7 @@ make build_image
 Spectrogram [OPTION...]
 
 -w, --width arg       Image width (default: 1920)
--r, --resolution arg  SFTP window size (must be a power of 2). A window of
+-r, --resolution arg  FFT window size (must be a power of 2). A window of
                       size r samples r/2 different frequencies (default:
                       4096)
 -s, --start arg       Start time in seconds (default: 0)
