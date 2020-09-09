@@ -27,7 +27,7 @@ Spectrogram [OPTION...]
                     (default: 0)
     --fmax arg        Crop maximum frequency to be shown on the image
                     (default: 22050)
--i, --input arg       Input wav-file with 44100Hz sample rate
+-i, --input arg       Input wav-file
 -o, --output arg      Output bmp file (default: out.bmp)
     --help            Print usage instructions
 

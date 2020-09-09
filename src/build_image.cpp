@@ -121,7 +121,7 @@ int main(int argc, char** argv){
       ("db-ceil", "Frequencies louder than this are clamped to this value (dB)", cxxopts::value<double>()->default_value("-5"))
       ("fmin", "Crop minimum frequency to be shown on the image", cxxopts::value<double>()->default_value("0"))
       ("fmax", "Crop maximum frequency to be shown on the image", cxxopts::value<double>()->default_value("22050"))
-      ("i,input", "Input wav-file with 44100Hz sample rate",cxxopts::value<string>())
+      ("i,input", "Input wav-file",cxxopts::value<string>())
       ("o,output", "Output bmp file",cxxopts::value<string>()->default_value("out.bmp"))
       ("help", "Print usage instructions", cxxopts::value<bool>()->default_value("false"))
     ;
