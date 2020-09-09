@@ -166,8 +166,6 @@ int main(int argc, char** argv){
     double end_time = cli_params["end"].as<double>();
     end_time = min(end_time, (double)v_short.size() / sr); // If end-time is past the end of the audio, set it to the end of the song
 
-    //double freq_bin_size = sr / nrows; // How much frequency each row in the spectrogram covers
-
     auto normalize_to_plusminus_1 = [](vector<short>& v){
         int minv = *std::min_element(v.begin(), v.end());
         int maxv = *std::max_element(v.begin(), v.end());

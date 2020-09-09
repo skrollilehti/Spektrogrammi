@@ -6,8 +6,6 @@
 #include <string>
 #include "readWav.hh"
 
-// Code kindly provided by OOliOO @ IRCNet
-
 using namespace std;
 namespace {
 	int to_int(char* data, int data_size){
