@@ -95,15 +95,17 @@ vector<short> readUncompressedWavFile(string file_name){
     int sample_size_in_bytes=to_int(bitsPerSample,2)/8;
 
     assert(sample_size_in_bytes == 2);
-    assert(numberOfChannels == 2);
+    assert(numberOfChannels <= 2);
     vector<short> buf(data_array_size*numberOfChannels);
     fin.read((char*)&buf[0], buf.size()*sample_size_in_bytes);
 
-    // Add left and right channels together
-    for(int i = 0; i < buf.size()/2; i++){
-        buf[i] = ((int)buf[2*i] + (int)buf[2*i+1]) / 2;
+    if(numberOfChannels == 2){
+        // Add left and right channels together
+        for(int i = 0; i < buf.size()/2; i++){
+            buf[i] = ((int)buf[2*i] + (int)buf[2*i+1]) / 2;
+        }
+        buf.resize(buf.size()/2);
     }
-    buf.resize(buf.size()/2);
 
     return buf;
 }
