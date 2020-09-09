@@ -114,7 +114,7 @@ int main(int argc, char** argv){
     options.add_options()
       ("w,width", "Image width", cxxopts::value<int>()->default_value("1920"))
       //("h,height", "Image height", cxxopts::value<int>()->default_value("1080"))
-      ("r,resolution", "SFTP window size (must be a power of 2). A window of size r samples r/2 different frequencies", cxxopts::value<int>()->default_value("4096"))
+      ("r,resolution", "FFT window size (must be a power of 2). A window of size r samples r/2 different frequencies", cxxopts::value<int>()->default_value("4096"))
       ("s,start", "Start time in seconds", cxxopts::value<double>()->default_value("0"))
       ("e,end", "End time in seconds", cxxopts::value<double>()->default_value("1000000000"))
       ("db-floor", "Only frequencies louder than this are drawn (dB)", cxxopts::value<double>()->default_value("-8"))
