@@ -10,21 +10,9 @@
 #include "readWav.hh"
 #include "bitmap.hh"
 #include "cxxopts.hpp"
+#include "fft.hh"
 
 using namespace std;
-const double PI = atan2(0, -1);
-
-vector<complex<double> > get_DFT(const vector<double>& input){
-    int n = input.size();
-    const complex<double> i = complex<double>(0,1);
-    vector<complex<double> > ans(n);
-    for(int k = 0; k < n; k++){
-        for(int j = 0; j < n; j++){
-            ans[k] += input[j] * exp(-2.0*PI*k*j/n*i);
-        }
-    }
-    return ans;
-}
 
 vector<double> hann_window(const vector<double>& v){
     vector<double> v2 = v;
@@ -52,7 +40,7 @@ vector<vector<Pixel> > build_spectrogram(
         int start = column * ((samples.size()-window_size)/ncols); // Ikkunan alku
         int end = min(start + window_size, (int)samples.size()-1); // Yksi ikkunan yli lopun
         vector<double> window_samples(samples.begin() + start, samples.begin() + end);
-        vector<complex<double> > DFT = get_DFT(hann_window(window_samples));
+        vector<complex<double> > DFT = fft(hann_window(window_samples));
         for(int j = 0; j < window_size; j++){
             double log_amplitude = log10(abs(DFT[j]) / window_size); // Välillä (-ääretön,0]
             double intensity = min(dB_ceil, max(dB_floor, log_amplitude)) - dB_floor; // Välillä [0, dB_ceiling-dB_floor]
@@ -131,11 +119,10 @@ int main(int argc, char** argv){
       ("e,end", "End time in seconds", cxxopts::value<double>()->default_value("1000000000"))
       ("db-floor", "Only frequencies louder than this are drawn (dB)", cxxopts::value<double>()->default_value("-8"))
       ("db-ceil", "Frequencies louder than this are clamped to this value (dB)", cxxopts::value<double>()->default_value("-5"))
-      ("fmin", "Minimum frequency to be shown on the image", cxxopts::value<double>()->default_value("0"))
-      ("fmax", "Maximum frequency to be shown on the image", cxxopts::value<double>()->default_value("22050"))
+      ("fmin", "Crop minimum frequency to be shown on the image", cxxopts::value<double>()->default_value("0"))
+      ("fmax", "Crop maximum frequency to be shown on the image", cxxopts::value<double>()->default_value("22050"))
       ("i,input", "Input wav-file with 44100Hz sample rate",cxxopts::value<string>())
       ("o,output", "Output bmp file",cxxopts::value<string>()->default_value("out.bmp"))
-      ("u,supersample", "Supersampling factor. Must be a power of two.", cxxopts::value<int>()->default_value("1"))
       ("help", "Print usage instructions", cxxopts::value<bool>()->default_value("false"))
     ;
 
@@ -145,8 +132,6 @@ int main(int argc, char** argv){
         cerr << options.help() << endl;
         return 1;
     }
-
-    int ss_factor = cli_params["supersample"].as<int>();
 
     int nrows = cli_params["resolution"].as<int>();
     int ncols = cli_params["width"].as<int>();
@@ -163,23 +148,17 @@ int main(int argc, char** argv){
         return ones == 1;
     };
 
-    if(!is_power_of_two(ss_factor)){
-        cerr << "Error: supersample factor " << ss_factor << " is not a power of two" << endl;
-        return 1;
-    }
-
     if(!is_power_of_two(nrows)){
-        cerr << "Error: number of rows " << nrows << " is not a power of two" << endl;
+        cerr << "Error: resolution " << nrows << " is not a power of two" << endl;
         return 1;
     }
 
     double dB_floor = cli_params["db-floor"].as<double>();
     double dB_ceiling = cli_params["db-ceil"].as<double>();
 
-    vector<short> v_short = readUncompressedWavFile(cli_params["input"].as<string>());
+    vector<short> v_short; int sr;
+    std::tie(v_short, sr) = readUncompressedWavFile(cli_params["input"].as<string>());
     string outfile = cli_params["output"].as<string>();
-
-    int sr = 44100; // Sample rate. TODO: no hardcoding
 
     double start_time = cli_params["start"].as<double>();
     start_time = max(0.0, start_time);
@@ -201,6 +180,6 @@ int main(int argc, char** argv){
     vector<double> samples = normalize_to_plusminus_1(v_short);
     vector<vector<Pixel> > spectrogram = build_spectrogram(nrows, ncols, dB_floor, dB_ceiling, samples, 0.5);
 
-    create_image(spectrogram, fmin, fmax, sr, "out.bmp");
+    create_image(spectrogram, fmin, fmax, sr, outfile);
 
 }

@@ -3,7 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <utility>
 
-std::vector<short> readUncompressedWavFile(std::string file_name);
+std::pair<std::vector<short>, int> readUncompressedWavFile(std::string file_name);
 
 #endif

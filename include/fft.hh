@@ -54,9 +54,18 @@ void fft_in_place(vector<complex<double>>& pol) {
 }
 
 // Input must have a length that is a power of two
-vector<complex<double> > fft(vector<complex<double> >& input){
+vector<complex<double> > fft(const vector<complex<double> >& input){
     assert(1 << (int)log2(input.size()) == input.size()); // Check that the length is a power of two
     vector<complex<double> > output = input;
+    fft_in_place(output);
+    return output;
+}
+
+// Input must have a length that is a power of two
+vector<complex<double> > fft(const vector<double>& input){
+    assert(1 << (int)log2(input.size()) == input.size()); // Check that the length is a power of two
+    vector<complex<double> > output;
+	for(double x : input) output.push_back(complex<double>(x,0));
     fft_in_place(output);
     return output;
 }
