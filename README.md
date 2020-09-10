@@ -20,8 +20,8 @@ Usage:
   -w, --width arg       Kuvan leveys pikseleinä (default: 1920)
   -r, --resolution arg  FFT ikkunan koko. Täytyy olla kahden potenssi.
                         (default: 4096)
-  -s, --start arg       Alkuaika äänitiedostossa (default: 0)
-  -e, --end arg         Loppuaika äänitiedostossa (default: 1000000000)
+  -s, --start arg       Alkuaika äänitiedostossa sekunneissa (default: 0)
+  -e, --end arg         Loppuaika äänitiedostossa sekunneissa (default: 1000000000)
       --db-floor arg    Amplitudiasteikon katkaisukynnys alhaalta (log10)
                         (default: -8)
       --db-ceil arg     Amplitudiasteikon katkaisukynnys ylhäältä (log10)
