@@ -8,7 +8,7 @@ Toimii ympäristössä Ubuntu 18.04. Ei ulkoisia koodiriippuvuuksia.
 make spectrogram
 ```
 
-Binääri tulee tiedostoon bin/spectrogram
+Ohjelma tulee tiedostoon bin/spectrogram.
 
 ## Ajaminen
 
