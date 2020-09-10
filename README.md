@@ -5,8 +5,10 @@ Toimii ympäristössä Ubuntu 18.04. Ei ulkoisia koodiriippuvuuksia.
 ## Kääntäminen
 
 ```
-make build_image
+make spectrogram
 ```
+
+Binääri tulee tiedostoon bin/spectrogram
 
 ## Ajaminen
 
@@ -37,7 +39,7 @@ Usage:
 ## Esimerkki
 
 ```
-./build_image -i data/dial_up.wav -w 4000 -r 1024 --db-floor -5.0 --db-ceil -1.0 -o dial_up.bmp
+./bin/spectrogram -i data/dial_up.wav -w 4000 -r 1024 --db-floor -5.0 --db-ceil -1.0 -o dial_up.bmp
 ```
 
 ## Rajoitteet
