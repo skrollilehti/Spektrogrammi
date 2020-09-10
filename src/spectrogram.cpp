@@ -119,7 +119,7 @@ int main(int argc, char** argv){
       ("db-floor", "Amplitudiasteikon katkaisukynnys alhaalta (log10)", cxxopts::value<double>()->default_value("-8"))
       ("db-ceil", "Amplitudiasteikon katkaisukynnys ylhäältä (log10)", cxxopts::value<double>()->default_value("-5"))
       ("fmin", "Pienin kuvaan piirrettävä taajuus", cxxopts::value<double>()->default_value("0"))
-      ("fmax", "Suurin kuvaan pirrettävä taajuus", cxxopts::value<double>()->default_value("22050"))
+      ("fmax", "Suurin kuvaan piirrettävä taajuus", cxxopts::value<double>()->default_value("22050"))
       ("i,input", "Syöte-audio wav-formaatissa",cxxopts::value<string>())
       ("o,output", "Pirrettävän spektrogrammin tiedostonimi (bmp-formaatti)",cxxopts::value<string>()->default_value("out.bmp"))
       ("help", "Tulosta käyttöohjeet", cxxopts::value<bool>()->default_value("false"))

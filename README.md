@@ -27,9 +27,9 @@ Usage:
       --db-ceil arg     Amplitudiasteikon katkaisukynnys ylhäältä (log10)
                         (default: -5)
       --fmin arg        Pienin kuvaan piirrettävä taajuus (default: 0)
-      --fmax arg        Suurin kuvaan pirrettävä taajuus (default: 22050)
+      --fmax arg        Suurin kuvaan piirrettävä taajuus (default: 22050)
   -i, --input arg       Syöte-audio wav-formaatissa
-  -o, --output arg      Pirrettävän spektrogrammin tiedostonimi
+  -o, --output arg      Piirrettävän spektrogrammin tiedostonimi
                         (bmp-formaatti) (default: out.bmp)
       --help            Tulosta käyttöohjeet
 
