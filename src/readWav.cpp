@@ -101,7 +101,7 @@ pair<vector<short>, int> readUncompressedWavFile(string file_name){
                 sum += buf[numberOfChannels*i + j];
             buf[i] = sum / numberOfChannels;
         }
-        buf.resize(buf.size()/2);
+        buf.resize(buf.size()/numberOfChannels);
     }
 
     return {buf, sample_rate};
