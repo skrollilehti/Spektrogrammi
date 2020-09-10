@@ -93,7 +93,7 @@ pair<vector<short>, int> readUncompressedWavFile(string file_name){
     vector<short> buf(data_array_size*numberOfChannels);
     fin.read((char*)&buf[0], buf.size()*sample_size_in_bytes);
 
-    if(numberOfChannels == 2){
+    if(numberOfChannels >= 2){
         // Add channels together
         for(int i = 0; i < buf.size()/numberOfChannels; i++){
             int sum = 0;
