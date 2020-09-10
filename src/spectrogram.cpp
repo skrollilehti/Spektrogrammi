@@ -108,22 +108,21 @@ void create_image(vector<vector<Pixel> > spectrogram,
 
 int main(int argc, char** argv){
 
-    cxxopts::Options options("Spectrogram", "Takes a wav-file and creates a bmp-image");
+    cxxopts::Options options("spectrogram", "Ottaa syötteenä wav-tiedoston ja kirjoittaa spektrogrammin bmp-tiedostoon.");
     int original_argc = argc; // It seems the CLI parsing library modifies argc, so store the original value
 
     options.add_options()
-      ("w,width", "Image width", cxxopts::value<int>()->default_value("1920"))
-      //("h,height", "Image height", cxxopts::value<int>()->default_value("1080"))
-      ("r,resolution", "FFT window size (must be a power of 2). A window of size r samples r/2 different frequencies", cxxopts::value<int>()->default_value("4096"))
-      ("s,start", "Start time in seconds", cxxopts::value<double>()->default_value("0"))
-      ("e,end", "End time in seconds", cxxopts::value<double>()->default_value("1000000000"))
-      ("db-floor", "Only frequencies louder than this are drawn (dB)", cxxopts::value<double>()->default_value("-8"))
-      ("db-ceil", "Frequencies louder than this are clamped to this value (dB)", cxxopts::value<double>()->default_value("-5"))
-      ("fmin", "Crop minimum frequency to be shown on the image", cxxopts::value<double>()->default_value("0"))
-      ("fmax", "Crop maximum frequency to be shown on the image", cxxopts::value<double>()->default_value("22050"))
-      ("i,input", "Input wav-file",cxxopts::value<string>())
-      ("o,output", "Output bmp file",cxxopts::value<string>()->default_value("out.bmp"))
-      ("help", "Print usage instructions", cxxopts::value<bool>()->default_value("false"))
+      ("w,width", "Kuvan leveys pikseleinä", cxxopts::value<int>()->default_value("1920"))
+      ("r,resolution", "FFT ikkunan koko. Täytyy olla kahden potenssi.", cxxopts::value<int>()->default_value("4096"))
+      ("s,start", "Alkuaika äänitiedostossa", cxxopts::value<double>()->default_value("0"))
+      ("e,end", "Loppuaika äänitiedostossa", cxxopts::value<double>()->default_value("1000000000"))
+      ("db-floor", "Amplitudiasteikon katkaisukynnys alhaalta (log10)", cxxopts::value<double>()->default_value("-8"))
+      ("db-ceil", "Amplitudiasteikon katkaisukynnys ylhäältä (log10)", cxxopts::value<double>()->default_value("-5"))
+      ("fmin", "Pienin kuvaan piirrettävä taajuus", cxxopts::value<double>()->default_value("0"))
+      ("fmax", "Suurin kuvaan pirrettävä taajuus", cxxopts::value<double>()->default_value("22050"))
+      ("i,input", "Syöte-audio wav-formaatissa",cxxopts::value<string>())
+      ("o,output", "Pirrettävän spektrogrammin tiedostonimi (bmp-formaatti)",cxxopts::value<string>()->default_value("out.bmp"))
+      ("help", "Tulosta käyttöohjeet", cxxopts::value<bool>()->default_value("false"))
     ;
 
     auto cli_params = options.parse(argc, argv);

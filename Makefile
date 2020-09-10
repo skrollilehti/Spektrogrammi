@@ -1,4 +1,4 @@
-.PHONY: build_image
+.PHONY: spectrogram
 
-build_image:
-	$(CXX) -g src/build_image.cpp src/readWav.cpp -o build_image -std=c++14 -O3 -Wall -Wno-sign-compare -Wextra -I include
+spectrogram:
+	$(CXX) -g src/spectrogram.cpp src/readWav.cpp -o bin/spectrogram -std=c++14 -O3 -Wall -Wno-sign-compare -Wextra -I include

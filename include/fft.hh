@@ -1,9 +1,9 @@
 #pragma once
-#include "globals.hh"
 
-// These are taken from https://github.com/anroysko/contestlib/blob/master/src/math/fft.cpp
+// These are taken with permission from https://github.com/anroysko/contestlib/blob/master/src/math/fft.cpp
 
-
+using namespace std;
+const double PI=atan2((double)0.0, (double)-1.0);
 
 // Applies the bit-reverse permutation to the given vector
 // Preconditions: vec.size() = 2^lg for some lg.
@@ -68,14 +68,4 @@ vector<complex<double> > fft(const vector<double>& input){
 	for(double x : input) output.push_back(complex<double>(x,0));
     fft_in_place(output);
     return output;
-}
-
-// Computes the Discrete-time Fourier transform at angle omega (radians). If sample rate is
-// s, then this is the frequency response at frequency omega/(2*pi) * s
-complex<double> get_single_dft_sample(vector<complex<double> >& input, double omega){
-	complex<double> ans;
-	for(LL i = 0; i < input.size(); i++){
-		ans += input[i] * polar(1.0, omega * i);
-	}
-	return ans;
 }

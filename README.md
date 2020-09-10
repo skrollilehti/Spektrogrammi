@@ -11,25 +11,26 @@ make build_image
 ## Ajaminen
 
 ```
-Spectrogram [OPTION...]
+Ottaa syötteenä wav-tiedoston ja kirjoittaa spektrogrammin bmp-tiedostoon
+Usage:
+  spectrogram [OPTION...]
 
--w, --width arg       Image width (default: 1920)
--r, --resolution arg  FFT window size (must be a power of 2). A window of
-                      size r samples r/2 different frequencies (default:
-                      4096)
--s, --start arg       Start time in seconds (default: 0)
--e, --end arg         End time in seconds (default: 1000000000)
-    --db-floor arg    Only frequencies louder than this are drawn (dB)
-                    (default: -8)
-    --db-ceil arg     Frequencies louder than this are clamped to this
-                    value (dB) (default: -5)
-    --fmin arg        Crop minimum frequency to be shown on the image
-                    (default: 0)
-    --fmax arg        Crop maximum frequency to be shown on the image
-                    (default: 22050)
--i, --input arg       Input wav-file
--o, --output arg      Output bmp file (default: out.bmp)
-    --help            Print usage instructions
+  -w, --width arg       Kuvan leveys pikseleinä (default: 1920)
+  -r, --resolution arg  FFT ikkunan koko. Täytyy olla kahden potenssi.
+                        (default: 4096)
+  -s, --start arg       Alkuaika äänitiedostossa (default: 0)
+  -e, --end arg         Loppuaika äänitiedostossa (default: 1000000000)
+      --db-floor arg    Amplitudiasteikon katkaisukynnys alhaalta (log10)
+                        (default: -8)
+      --db-ceil arg     Amplitudiasteikon katkaisukynnys ylhäältä (log10)
+                        (default: -5)
+      --fmin arg        Pienin kuvaan piirrettävä taajuus (default: 0)
+      --fmax arg        Suurin kuvaan pirrettävä taajuus (default: 22050)
+  -i, --input arg       Syöte-audio wav-formaatissa
+  -o, --output arg      Pirrettävän spektrogrammin tiedostonimi
+                        (bmp-formaatti) (default: out.bmp)
+      --help            Tulosta käyttöohjeet
+
 
 ```
 
